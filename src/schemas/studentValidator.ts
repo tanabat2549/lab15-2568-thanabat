@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const zStudentId = z
+export const zStudentId = z
   .string()
   .length(9, { message: "Student Id must contain 9 characters" });
 const zFirstName = z
@@ -9,7 +9,9 @@ const zFirstName = z
 const zLastName = z
   .string()
   .min(3, { message: "Last name requires at least 3 characters" });
-const zProgram = z.enum(["CPE","ISNE"], {message: "Program must be either CPE or ISNE",});
+const zProgram = z.enum(["CPE", "ISNE"], {
+  message: "Program must be either CPE or ISNE",
+});
 const zCourse = z.array(z.number());
 
 export const zStudentPostBody = z.object({
@@ -17,7 +19,7 @@ export const zStudentPostBody = z.object({
   firstName: zFirstName,
   lastName: zLastName,
   program: zProgram,
-  course :zCourse.nullish()
+  course: zCourse.nullish(),
 });
 
 export const zStudentPutBody = z.object({
@@ -28,5 +30,5 @@ export const zStudentPutBody = z.object({
 });
 
 export const zStudentDeleteBody = z.object({
-  studentId: zStudentId
+  studentId: zStudentId,
 });
